@@ -6,6 +6,7 @@
 </template>
 
 <script>
+//import sass from './assets/sass.scss';
 export default {
   name: 'App'
 }

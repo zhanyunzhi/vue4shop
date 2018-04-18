@@ -8,15 +8,15 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-const createLintingRule = () => ({
-  test: /\.(js|vue)$/,
+const createLintingRule = () => ({    
+  /*test: /\.(js|vue)$/,      //代码检查去掉
   loader: 'eslint-loader',
   enforce: 'pre',
   include: [resolve('src'), resolve('test')],
   options: {
     formatter: require('eslint-friendly-formatter'),
     emitWarning: !config.dev.showEslintErrorsInOverlay
-  }
+  }*/
 })
 
 module.exports = {
