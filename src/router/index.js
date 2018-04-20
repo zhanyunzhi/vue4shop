@@ -21,7 +21,23 @@ export default new Router({   //定义路由
     {
       path: '/manage',
       name: 'Manage',
-      component: Manage
+      component: Manage,
+      /*children:[      //子路由由children表示
+          {
+              path:'list',
+              name: 'list',
+              component:List
+          },
+          {
+              path:'edit',
+              name: 'edit',
+              component:Edit
+          }
+      ]*/
+    },
+    {     //输入的路由不存在的时候，重定向到 '/'
+        path:'*',
+        redirect: '/'
     },
   ]
 })
