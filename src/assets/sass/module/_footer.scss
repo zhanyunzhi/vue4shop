@@ -1,0 +1,64 @@
+//底部导航栏样式
+.bar-footer{
+  height:1.1rem;
+  background-color: $blackLighter;
+  border-top:1px solid $borderGray;
+  padding:.15rem 0 .14rem;
+  .icon-footer{
+    background-image: url(../img/public/footer-sprite.png);
+    background-size: .94rem 1.36rem;
+    display: inline-block;
+  }
+  .icon-home{
+    background-position: -.48rem -.48rem;
+    width:0.44rem;
+    height:0.46rem;
+  }
+  .icon-collect{
+    background-position:  0 -.48rem;
+    width:0.46rem;
+    height:0.46rem;
+  }
+  .icon-record{
+    background-position:  -.48rem -.96rem;
+    width:0.46rem;
+    height:0.4rem;
+  }
+  .txt-footer{
+    font-size:0.24rem;
+    color:$blackLight;
+    margin-top:.04rem;
+  }
+  ul{
+    @include display-flex();
+    width: 100%;
+    li{
+      @include flex(1);
+      text-align: center;
+    }
+    .active{
+      .icon-home{
+        background-position:  -.48rem 0;
+      }
+      .icon-collect{
+        background-position: 0 0;
+      }
+      .icon-record{
+        background-position:  0 -.96rem;
+      }
+      .txt-footer{
+        color:$blue;
+      }
+    }
+  }
+}
+.has-footer{
+  bottom:1.1rem;
+}
+@media not all, (-webkit-min-device-pixel-ratio: 1.5), not all, (min-resolution: 144dpi), (min-resolution: 1.5dppx){
+  .bar{
+    background-size: 0;
+  }
+}
+
+

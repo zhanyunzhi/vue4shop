@@ -1,6 +1,6 @@
 <template>
   <div>
-  	欢迎来到首页
+  	欢迎来到my
   	<footer-nav></footer-nav>
   </div>
 </template>

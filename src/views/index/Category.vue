@@ -1,15 +1,14 @@
 <template>
   <div>
-  	欢迎来到manage
+  	欢迎来到category
   	<footer-nav></footer-nav>
   </div>
 </template>
 
 <script>
-	import FooterNav from '../../components/footer.vue';
 	export default {
 	  	components: {
-  			FooterNav
+  			// FooterNav
 	  	}
 	}
 </script>

@@ -4,6 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
     <title>vue</title>
+    <script type="text/javascript">
+    	var docEle = document.documentElement;
+        var timer = null;
+        fn = function() {
+        	timer = setTimeout(function() {          //加延迟0.3s不然在android下获取到的宽高是旋转屏幕之前的宽高
+	            var width = docEle.clientWidth;
+	            //alert(width)
+	            if (width < 320) {
+	              docEle.style.fontSize = 42.6667 + "px";//
+	            }
+	            else if (width > 750) {
+	              docEle.style.fontSize = 100 + "px";
+	            }
+	            else {
+	              //以750设计稿宽度为基准设置fontSize:100px;这样保证iPhone6以下是高清
+	              docEle.style.fontSize = 100 * (width / 750) + "px";
+	            }
+      		},300)
+        };
+        var evt = "onorientationchange" in window ? "orientationchange" : "resize";//区分Mobile和PC以加载不同的事件
+        window.addEventListener(evt, fn, false);
+        fn();
+    </script>
   </head>
   <body>
     <div id="app"></div>
