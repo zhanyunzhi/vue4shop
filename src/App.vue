@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <header-nav></header-nav>
     <router-view/>    <!-- 可以同时定义多个router-view -->
   </div>
 </template>
@@ -18,6 +19,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  padding-top: .9rem;
 }
 html{
     -webkit-text-size-adjust:none;

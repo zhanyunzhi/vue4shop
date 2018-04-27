@@ -8,29 +8,30 @@
 
 <script>
 export default {
+	name: 'FooterNav',
   data(){
   	return {
   		navLists: [
   			{
-  				"text":"首页",
-  				"paths":"/",
-  				"image":"icon_home"
+  				'text':'首页',
+  				'paths':'/',
+  				'image':'icon_home'
 
   			},
   			{
-  				"text":"分类",
-  				"paths":"/category",
-  				"image":"icon_cate"
+  				'text':'分类',
+  				'paths':'/category',
+  				'image':'icon_cate'
   			},
   			{
-  				"text":"购物车",
-  				"paths":"/cart",
-  				"image":"icon_cart"
+  				'text':'购物车',
+  				'paths':'/cart',
+  				'image':'icon_cart'
   			},
   			{
-  				"text":"我",
-  				"paths":"/my",
-  				"image":"icon_my"
+  				'text':'我',
+  				'paths':'/my',
+  				'image':'icon_my'
   			},
   		]
   	}
