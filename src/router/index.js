@@ -8,11 +8,13 @@ import Category from '@/views/index/Category'
 import Cart from '@/views/index/Cart'
 import My from '@/views/index/My'
 
+import { mapActions } from 'vuex' 
+
 Vue.use(Router);   //使用路由依赖
 Vue.component('footer-nav', FooterNav);   //全局注册组件
 // Vue.component('header-nav', HeaderNav);   //全局注册组件
 
-export default new Router({   //定义路由
+const router = new Router({   //定义路由
   routes: [
     {
       path: '/',
@@ -39,4 +41,21 @@ export default new Router({   //定义路由
         redirect: '/'
     },
   ]
-})
+});
+router.beforeEach((to, from, next) => {
+  // console.log(to)
+  // console.log(from)
+  // console.log(router)
+  if(to.name === 'Index'){
+    // router.app.backNotShow();
+    mapActions('header',{
+      backNotShow: 'backNotShow',
+      homeNotShow: 'homeNotShow'
+    }),
+    this.backNotShow();
+    this.homeNotShow();
+  }
+  next();
+});
+
+export default router;
