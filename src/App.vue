@@ -7,8 +7,12 @@
 
 <script>
 //import sass from './assets/sass.scss';
+import HeaderNav from '@/components/HeaderNav'   //引入页面组件，命名为HeaderNav
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    HeaderNav
+  }
 }
 </script>
 

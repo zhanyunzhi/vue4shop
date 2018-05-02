@@ -1,14 +1,20 @@
 <template>
 	<div class="header">
-		<div class="header__back">返回</div>
+		<div class="header__back" v-show="back">返回</div>
 		<h2 class="header__title">我是标题</h2>
-		<div class="header__home">home</div>
+		<div class="header__home" v-show="home">home</div>
 	</div>
 </template>
 
 <script>
+	import { mapGetters} from 'vuex'
 	export default {
 	  name: 'HeaderNav',
+	  computed: {
+	  	...mapGetters('header',[
+		  	'back','home'
+	  	]),
+	  }
 	}
 </script>
 

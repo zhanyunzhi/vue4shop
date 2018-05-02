@@ -2,7 +2,6 @@ import Vue from 'vue'   //引入vue框架
 import Router from 'vue-router'   //引入路由依赖
 //这里放自定义组件
 import FooterNav from '@/components/FooterNav'   //引入页面组件，命名为FooterNav
-import HeaderNav from '@/components/HeaderNav'   //引入页面组件，命名为HeaderNav
 //这里放views
 import Index from '@/views/index/Index'
 import Category from '@/views/index/Category'
@@ -11,7 +10,7 @@ import My from '@/views/index/My'
 
 Vue.use(Router);   //使用路由依赖
 Vue.component('footer-nav', FooterNav);   //全局注册组件
-Vue.component('header-nav', HeaderNav);   //全局注册组件
+// Vue.component('header-nav', HeaderNav);   //全局注册组件
 
 export default new Router({   //定义路由
   routes: [
