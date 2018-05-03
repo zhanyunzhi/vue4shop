@@ -8,8 +8,6 @@ import Category from '@/views/index/Category'
 import Cart from '@/views/index/Cart'
 import My from '@/views/index/My'
 
-import { mapActions } from 'vuex' 
-
 Vue.use(Router);   //使用路由依赖
 Vue.component('footer-nav', FooterNav);   //全局注册组件
 // Vue.component('header-nav', HeaderNav);   //全局注册组件
@@ -42,18 +40,16 @@ const router = new Router({   //定义路由
     },
   ]
 });
+import store from '@/store'
 router.beforeEach((to, from, next) => {
-  // console.log(to)
-  // console.log(from)
-  // console.log(router)
+  // console.log(store.state.header.showBack);       //路由中调用模块化后vuex中的state   
+  // console.log(store.getters['footer/back']);      //路由中调用模块化后vuex中的getters
   if(to.name === 'Index'){
-    // router.app.backNotShow();
-    mapActions('header',{
-      backNotShow: 'backNotShow',
-      homeNotShow: 'homeNotShow'
-    }),
-    this.backNotShow();
-    this.homeNotShow();
+    store.dispatch('header/backNotShow');            //路由中调用模块化后vuex中的actions
+    store.dispatch('header/homeNotShow');                 //路由中调用模块化后vuex中的mutations
+  }else{
+    store.dispatch('header/backShow');            //路由中调用模块化后vuex中的actions
+    store.dispatch('header/homeShow');                 //路由中调用模块化后vuex中的mutations
   }
   next();
 });
