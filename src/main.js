@@ -12,8 +12,6 @@ Vue.prototype.$api = api;		// 将API方法绑定到全局
 import Toasted from 'vue-toasted';		
 Vue.use(Toasted);
 
-// Vue.prototype.$toasted = Toasted
-
 Vue.config.productionTip = false	//关闭生产模式下给出的提示
 
 // axios.defaults.baseURL = process.env.NODE_ENV !== 'production' ? 'localhost/index.php/WXAPI/' : '127.0.0.1/index.php/WXAPI/';	//设置网络请求的baseURL
