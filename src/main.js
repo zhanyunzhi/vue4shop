@@ -6,8 +6,13 @@ import router from './router'	//引入路由设置
 import store from './store'
 // 引用API文件
 import api from './api'		
-// 将API方法绑定到全局
-Vue.prototype.$api = api
+Vue.prototype.$api = api;		// 将API方法绑定到全局
+
+//引入提示框vue-toasted
+import Toasted from 'vue-toasted';		
+Vue.use(Toasted);
+
+// Vue.prototype.$toasted = Toasted
 
 Vue.config.productionTip = false	//关闭生产模式下给出的提示
 

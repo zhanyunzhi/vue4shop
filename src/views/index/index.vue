@@ -53,6 +53,9 @@
     created: function() {
     	// console.log(path.getPath('home'));
     	// getHome();
+
+      this.$toasted.show('hello billosssss')
+      // Vue.toasted.show('hola billo');
     	this.$api.get('home')
     }
 	}

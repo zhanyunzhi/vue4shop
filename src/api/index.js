@@ -4,21 +4,7 @@
  * @date    2018-05-04 11:16:21
  * @version $Id$
  */
-/*import Vue from 'vue'			//引入vue框架
-import path from '@/api/path'		//api接口地址映射
-const getHome = () => {
-	Vue.$axios.get(path.getPath('home'))
-		.then(function (response) {
-	    console.log(response);
-	  })
-	  .catch(function (error) {
-	    console.log(error);
-	  });
-}
-
-export {
-	getHome,
-}*/
+import Vue from 'vue'
 // 引用axios
 import axios from 'axios'
 //引入api地址的映射地址
@@ -27,23 +13,23 @@ import path from './path'
 var root = process.env.NODE_ENV !== 'production' ? 'http://localhost/index.php/WXAPI/' : 'http://127.0.0.1/index.php/WXAPI/';
 // 自定义判断元素类型JS
 function toType (obj) {
- return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+	return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
 }
 // 参数过滤函数
 function filterNull (o) {
- for (var key in o) {
-  if (o[key] === null) {
-   delete o[key]
-  }
-  if (toType(o[key]) === 'string') {
-   o[key] = o[key].trim()
-  } else if (toType(o[key]) === 'object') {
-   o[key] = filterNull(o[key])
-  } else if (toType(o[key]) === 'array') {
-   o[key] = filterNull(o[key])
-  }
- }
- return o
+	for (var key in o) {
+		if (o[key] === null) {
+			delete o[key]
+		}
+		if (toType(o[key]) === 'string') {
+			o[key] = o[key].trim()
+		} else if (toType(o[key]) === 'object') {
+			o[key] = filterNull(o[key])
+		} else if (toType(o[key]) === 'array') {
+			o[key] = filterNull(o[key])
+		}
+	}
+	return o
 }
 /*
  接口处理函数
@@ -53,55 +39,51 @@ function filterNull (o) {
  params: 请求携带的参数
  success: 请求成功的回调
  failure: 请求失败的回调
-*/
+ */
  
 function apiAxios (method, url, params, success, failure) {
- if (params) {
-  params = filterNull(params)
- }
+ 	if (params) {
+ 		params = filterNull(params)
+ 	}
  // axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
- axios({
-  method: method,
-  url: path.getPath(url),
-  data: method === 'POST' || method === 'PUT' ? params : null,
-  params: method === 'GET' || method === 'DELETE' ? params : null,
-  baseURL: root,
-  timeout: 30000,
-  withCredentials: false
- })
+ 	axios({
+	 	method: method,
+	 	url: path.getPath(url),
+	 	data: method === 'POST' || method === 'PUT' ? params : null,
+	 	params: method === 'GET' || method === 'DELETE' ? params : null,
+	 	baseURL: root,
+	 	timeout: 30000,
+	 	withCredentials: false
+ 	})
  .then(function (res) {
-  if (res.data.status === 1) {
-   if (success) {
-    success(res.data)
-   }
-  } else {
-   if (failure) {
-    failure(res.data)
-   } else {
-    window.alert('error: ' + JSON.stringify(res.data))
-   }
-  }
- })
- .catch(function (err) {
-  let res = err.response
-  if (err) {
-   window.alert('api error, HTTP CODE: ' + res.status)
-  }
- })
+ 		if (res.data.status === 1) {
+ 			// this.$toasted.show('hello billo')
+ 			Vue.toasted.show('hola billo');
+ 			success && success(res.data)
+ 		} else {
+ 			failure && failure(res.data)
+ 		}
+ 	})
+ 	.catch(function (err) {
+	 	let res = err.response
+	 	if (err) {
+	 		window.alert('api error, HTTP CODE: ' + res.status)
+	 	}
+ 	})
 }
- 
+
 // 返回在vue模板中的调用接口
 export default {
- get: function (url, params, success, failure) {
-  return apiAxios('GET', url, params, success, failure)
- },
- post: function (url, params, success, failure) {
-  return apiAxios('POST', url, params, success, failure)
- },
- put: function (url, params, success, failure) {
-  return apiAxios('PUT', url, params, success, failure)
- },
- delete: function (url, params, success, failure) {
-  return apiAxios('DELETE', url, params, success, failure)
- }
+	get: function (url, params, success, failure) {
+		return apiAxios('GET', url, params, success, failure)
+	},
+	post: function (url, params, success, failure) {
+		return apiAxios('POST', url, params, success, failure)
+	},
+	put: function (url, params, success, failure) {
+		return apiAxios('PUT', url, params, success, failure)
+	},
+	delete: function (url, params, success, failure) {
+		return apiAxios('DELETE', url, params, success, failure)
+	}
 }
