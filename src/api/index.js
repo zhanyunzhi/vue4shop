@@ -57,17 +57,15 @@ function apiAxios (method, url, params, success, failure) {
  	})
  .then(function (res) {
  		if (res.data.status === 1) {
- 			// this.$toasted.show('hello billo')
- 			Vue.toasted.show('hola billo');
- 			success && success(res.data)
+ 			success ? success(res.data) : Vue.toasted.show(res.data.msg);
  		} else {
- 			failure && failure(res.data)
+ 			failure ? failure(res.data) : Vue.toasted.show(res.data.msg);
  		}
  	})
  	.catch(function (err) {
 	 	let res = err.response
 	 	if (err) {
-	 		window.alert('api error, HTTP CODE: ' + res.status)
+	 		Vue.toasted.error('error code ' + res.status);
 	 	}
  	})
 }

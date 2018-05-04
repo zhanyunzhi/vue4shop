@@ -10,7 +10,12 @@ Vue.prototype.$api = api;		// 将API方法绑定到全局
 
 //引入提示框vue-toasted
 import Toasted from 'vue-toasted';		
-Vue.use(Toasted);
+Vue.use(Toasted,{
+	position: 'bottom-center',
+	type: 'default',			//类型['default', 'success', 'info', 'error']
+	theme: "primary",		//样式['primary', 'outline', 'bubble']
+	duration: 3000,
+});
 
 Vue.config.productionTip = false	//关闭生产模式下给出的提示
 

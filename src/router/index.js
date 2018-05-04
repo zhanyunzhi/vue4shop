@@ -51,6 +51,7 @@ router.beforeEach((to, from, next) => {
     store.dispatch('header/backShow');            //路由中调用模块化后vuex中的actions
     store.dispatch('header/homeShow');                 //路由中调用模块化后vuex中的mutations
   }
+  Vue.toasted.clear();      //清除toast
   next();
 });
 

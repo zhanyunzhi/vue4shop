@@ -17,24 +17,17 @@
   	data () {
       return {
         //图片列表[arr]
-        pages:[
+        pages: [
           {
-            title: '范德萨法撒旦',
+            //html: '<div class="slider1">slider1</div>',
             style:{
-             background:'url(http://www.p5w.net/sy/zgsyll/201804/W020180427538534012182.jpg)'
+             background:'url()'
             }
           },
           {
-           title: '的法萨芬的',
            style:{
-            background:'url(http://www.p5w.net/sy/zgsyll/201804/W020180427538534012182.jpg)'
+            background:'url()'
             }
-          },
-          {
-            title: '发示范法',
-            style:{
-              background:'url(http://www.p5w.net/sy/zgsyll/201804/W020180427538534012182.jpg)'
-            },
           }
         ],
         //滑动配置[obj]
@@ -47,23 +40,32 @@
           direction:'horizontal',//方向设置，垂直滚动vertical
           infinite:1,//无限滚动前后遍历数
           slidesToScroll:1,//每次滑动项数
-        }
+        },
+        banners: []
       }
     },
     created: function() {
-    	// console.log(path.getPath('home'));
-    	// getHome();
-
-      this.$toasted.show('hello billosssss')
+      // this.$toasted.show('hello billosssss')
       // Vue.toasted.show('hola billo');
-    	this.$api.get('home')
+    	this.$api.get('home','',res => {
+        this.banners = res.result.ad;
+        this.setBanner(this.banners);
+      })
+    },
+    methods: {
+      setBanner: function (banners) {
+        for(let k in banners){
+          this.pages[k].style.background = 'url(' + banners[k].ad_code + ')'
+        }
+        console.log(this.pages)
+      }
     }
 	}
 </script>
 
 <style scoped lang="scss">
 	.slider-container{
-		height: 3rem;
+		height: 3.06rem;
 		width:100%;
 	}
 
