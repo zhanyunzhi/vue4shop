@@ -21,8 +21,10 @@ export {
 }*/
 // 引用axios
 import axios from 'axios'
+//引入api地址的映射地址
+import path from './path'		
 // 配置API接口地址
-var root = 'http://localhost/index.php/WXAPI/'
+var root = process.env.NODE_ENV !== 'production' ? 'http://localhost/index.php/WXAPI/' : 'http://127.0.0.1/index.php/WXAPI/';
 // 自定义判断元素类型JS
 function toType (obj) {
  return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
@@ -45,24 +47,26 @@ function filterNull (o) {
 }
 /*
  接口处理函数
- 这个函数每个项目都是不一样的，我现在调整的是适用于
- https://cnodejs.org/api/v1 的接口，如果是其他接口
- 需要根据接口的参数进行调整。参考说明文档地址：
- https://cnodejs.org/topic/5378720ed6e2d16149fa16bd
- 主要是，不同的接口的成功标识和失败提示是不一致的。
- 另外，不同的项目的处理方法也是不一致的，这里出错就是简单的alert
+ 根据接口的返回调整处理好success和failure的逻辑。
+ method: 请求的方法
+ url: 请求的地址对应的id，实际地址调用path.getPath(url)
+ params: 请求携带的参数
+ success: 请求成功的回调
+ failure: 请求失败的回调
 */
  
 function apiAxios (method, url, params, success, failure) {
  if (params) {
   params = filterNull(params)
  }
+ // axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
  axios({
   method: method,
-  url: url,
+  url: path.getPath(url),
   data: method === 'POST' || method === 'PUT' ? params : null,
   params: method === 'GET' || method === 'DELETE' ? params : null,
   baseURL: root,
+  timeout: 30000,
   withCredentials: false
  })
  .then(function (res) {

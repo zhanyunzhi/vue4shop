@@ -51,9 +51,9 @@
       }
     },
     created: function() {
-    	console.log(path.getPath('home'));
+    	// console.log(path.getPath('home'));
     	// getHome();
-    	this.$http.get(path.getPath('home'))
+    	this.$api.get('home')
     }
 	}
 </script>

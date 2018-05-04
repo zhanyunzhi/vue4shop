@@ -7,7 +7,7 @@ import store from './store'
 // 引用API文件
 import api from './api'		
 // 将API方法绑定到全局
-Vue.prototype.$http = api
+Vue.prototype.$api = api
 
 Vue.config.productionTip = false	//关闭生产模式下给出的提示
 
