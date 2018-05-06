@@ -68,16 +68,16 @@ export default {
 						color: #3cc51f;
 					}
 					.icon_home{
-						background-image: url(../assets/images/icon_home_selected.png);
+						background-image: url(../assets/images/footer/icon_home_selected.png);
 					}
 					.icon_cate{
-						background-image: url(../assets/images/icon_cate_selected.png);
+						background-image: url(../assets/images/footer/icon_cate_selected.png);
 					}
 					.icon_cart{
-						background-image: url(../assets/images/icon_cart_selected.png);
+						background-image: url(../assets/images/footer/icon_cart_selected.png);
 					}
 					.icon_my{
-						background-image: url(../assets/images/icon_my_selected.png);
+						background-image: url(../assets/images/footer/icon_my_selected.png);
 					}
 				}
 				h2{
@@ -87,16 +87,16 @@ export default {
 					background-size: 100%;
 				}
 				.icon_home{
-					background-image: url(../assets/images/icon_home.png);
+					background-image: url(../assets/images/footer/icon_home.png);
 				}
 				.icon_cate{
-					background-image: url(../assets/images/icon_cate.png);
+					background-image: url(../assets/images/footer/icon_cate.png);
 				}
 				.icon_cart{
-					background-image: url(../assets/images/icon_cart.png);
+					background-image: url(../assets/images/footer/icon_cart.png);
 				}
 				.icon_my{
-					background-image: url(../assets/images/icon_my.png);
+					background-image: url(../assets/images/footer/icon_my.png);
 				}
 			}
 		}

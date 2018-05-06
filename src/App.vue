@@ -52,4 +52,9 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   height:auto;
   line-height:1;
 }
+hr{
+  border: none;
+  border-top: .2rem solid #eeeeee;
+  margin: 0;
+}
 </style>
