@@ -17,7 +17,7 @@
 	caption{
 		line-height: .8rem;
 		padding-left: .4rem;
-		border-bottom: 1px solid #eeeeee;
+		border-bottom: 1px solid $borderColor;
 		font-size: .32rem;
 		text-align: left;
 		position: relative;
@@ -29,7 +29,7 @@
 			top: 0;
 			height: 100%;
 			width: .08rem;
-			background: #ff0000;
+			background: $red;
 		}
 	}
 </style>

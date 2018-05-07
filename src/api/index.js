@@ -45,7 +45,8 @@ function apiAxios (method, url, params, success, failure) {
  	if (params) {
  		params = filterNull(params)
  	}
- // axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
+  // axios.defaults.headers.common['Authorization'] = 'VUE';
+  axios.defaults.headers.common['vue'] = 'VUE';	//跳过验证
  	axios({
 	 	method: method,
 	 	url: path.getPath(url),

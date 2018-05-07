@@ -16,16 +16,14 @@ export default {
 </script>
 
 <style lang="scss">
-@import './assets/sass/core/_setting.scss';
-@import './assets/sass/core/_css3.scss';
-@import './assets/sass/core/_mixin.scss';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $black;
   padding-top: .9rem;
+  padding-bottom: 1.5rem;
 }
 html{
     -webkit-text-size-adjust:none;
@@ -33,9 +31,8 @@ html{
 }
 body,h1, h2, h3, h4, h5, h6,p{
   margin:0;
-  color:#000000;
+  color:$black;
   font-size:0.28rem;
-  line-height: 1;
 }
 ul, li{
   margin: 0;
@@ -56,7 +53,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 hr{
   border: none;
-  border-top: .2rem solid #eeeeee;
+  border-top: .2rem solid $borderColor;
   margin: 0;
 }
 .clear-fix{

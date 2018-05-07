@@ -51,7 +51,7 @@ export default {
 			height:100%;
 			li{
 				flex:1;
-				background-color:#f1f1f1;
+				background-color:$whitef1;
 				list-style: none;
 				a{
 					display: inline-block;
@@ -61,11 +61,11 @@ export default {
 					flex-direction: column;
 					justify-content: center;
 					font-size: .24rem;
-					color: #666666;
+					color: $black6;
 				}
 				.router-link-active{
 					span{
-						color: #3cc51f;
+						color: $green;
 					}
 					.icon_home{
 						background-image: url(../assets/images/footer/icon_home_selected.png);

@@ -26,14 +26,14 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-		background-color: #f1f1f1;
+		background-color: $whitef1;
 		line-height: .9rem;	
 	}
 	.header__title{
 		line-height: inherit;	
 		font-size: .36rem;
 		font-weight: normal;
-		color: #999;
+		color: $black9;
 	}
 	.header__back{
 		position: absolute;
