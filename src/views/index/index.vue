@@ -14,8 +14,17 @@
       </ul>
     </section>
     <hr class="split_block"/>
-    <category-for-index v-for="good in goods" :key="good.id" :text="good.name">
-      
+    <category-for-index class="clear-fix" v-for="goodList in goodLists" :key="goodList.id" :text="goodList.name">
+      <template slot="good">
+        <single-good-one 
+          v-for="goods in goodList.goods_list" 
+          :key="goods.goods_id"
+          :imgUrl="goods.original_img"
+          :intro="goods.goods_name"
+          :price="goods.shop_price"
+          :count="goods.click_count"
+        ></single-good-one>
+      </template>
     </category-for-index>
   	<footer-nav></footer-nav>
   </div>
@@ -23,14 +32,16 @@
 
 <script>
   import VueConciseSlider from 'vue-concise-slider'   //引入slider组件
-	import CategoryForIndex from '@/components/CategoryForIndex'		//引入GoodListClassify组件
+  import CategoryForIndex from '@/components/CategoryForIndex'    //引入GoodListClassify组件
+	import SingleGoodOne from '@/components/SingleGoodOne'		//引入SingleGoodOne组件
 	import path from '@/api/path'		
 	// import { getHome } from '@/api/api'		
 	export default {
 		name: "Index",
   	components: {
 			VueConciseSlider,
-      CategoryForIndex
+      CategoryForIndex,
+      SingleGoodOne,
   	},
   	data () {
       return {
@@ -60,14 +71,14 @@
           slidesToScroll:1,//每次滑动项数
         },
         banners: [],
-        goods: []
+        goodLists: []
       }
     },
     created: function() {
       // this.$toasted.show('hello billosssss')
       // Vue.toasted.show('hola billo');
     	this.$api.get('home','',res => {
-        this.goods = res.result.goods;
+        this.goodLists = res.result.goods;
         this.banners = res.result.ad;
         this.setBanner(this.banners);
       })

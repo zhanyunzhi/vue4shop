@@ -1,7 +1,8 @@
+<!-- 首页的推荐模块 -->
 <template>
   <div>
   	<caption>{{text}}</caption>
-		<slot></slot>
+		<slot name="good"></slot>
   </div>
 </template>
 

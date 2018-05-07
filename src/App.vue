@@ -6,7 +6,6 @@
 </template>
 
 <script>
-//import sass from './assets/sass.scss';
 import HeaderNav from '@/components/HeaderNav'   //引入页面组件，命名为HeaderNav
 export default {
   name: 'App',
@@ -16,7 +15,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import './assets/sass/core/_setting.scss';
+@import './assets/sass/core/_css3.scss';
+@import './assets/sass/core/_mixin.scss';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,7 +29,7 @@ export default {
 }
 html{
     -webkit-text-size-adjust:none;
-    font-family:  "PingFang-SC-Medium","Helvetica Neue", Helvetica, Tahoma, sans-serif !default;
+    font-family:  "PingFang-SC-Medium","Helvetica Neue", Helvetica, Tahoma, sans-serif;
 }
 body,h1, h2, h3, h4, h5, h6,p{
   margin:0;
@@ -56,5 +58,8 @@ hr{
   border: none;
   border-top: .2rem solid #eeeeee;
   margin: 0;
+}
+.clear-fix{
+  @include clearfix;
 }
 </style>
