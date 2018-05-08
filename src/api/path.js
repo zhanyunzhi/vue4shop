@@ -7,6 +7,7 @@
 const path = {
 	'home': 'Index/home',
 	'goodsCategoryList': 'Goods/goodsCategoryList',
+	'categoryBanner': 'Goods/categoryBanner',
 }
 const getPath = (id) => {
 	return path[id]

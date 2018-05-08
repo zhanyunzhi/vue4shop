@@ -24,6 +24,8 @@ export default {
   color: $black;
   padding-top: .9rem;
   padding-bottom: 1.5rem;
+  @include setMnWidth();
+  margin: 0 auto;
 }
 html{
     -webkit-text-size-adjust:none;

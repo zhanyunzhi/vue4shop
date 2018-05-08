@@ -17,6 +17,7 @@ function toType (obj) {
 }
 // 参数过滤函数
 function filterNull (o) {
+	if(toType(o) === 'string') return o;
 	for (var key in o) {
 		if (o[key] === null) {
 			delete o[key]
@@ -42,14 +43,19 @@ function filterNull (o) {
  */
  
 function apiAxios (method, url, params, success, failure) {
+	let urlParams = '';
  	if (params) {
  		params = filterNull(params)
+	 	if(toType(params) === 'string'){   //params传入类似“/parent/1”的时候，将params接到url后面
+			urlParams = params;
+			params = '';
+	 	}
  	}
   // axios.defaults.headers.common['Authorization'] = 'VUE';
   axios.defaults.headers.common['vue'] = 'VUE';	//跳过验证
  	axios({
 	 	method: method,
-	 	url: path.getPath(url),
+	 	url: path.getPath(url)+urlParams,
 	 	data: method === 'POST' || method === 'PUT' ? params : null,
 	 	params: method === 'GET' || method === 'DELETE' ? params : null,
 	 	baseURL: root,

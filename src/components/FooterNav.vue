@@ -46,6 +46,7 @@ export default {
 		height:1.2rem;
 		bottom:0;
 		position:fixed;
+  	@include setMnWidth();
 		ul{
 			display:flex;
 			height:100%;

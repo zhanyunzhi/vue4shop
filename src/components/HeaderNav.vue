@@ -25,9 +25,9 @@
 		width: 100%;
 		position: fixed;
 		top: 0;
-		left: 0;
 		background-color: $whitef1;
 		line-height: .9rem;	
+  	@include setMnWidth();
 	}
 	.header__title{
 		line-height: inherit;	
