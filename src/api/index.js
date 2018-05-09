@@ -63,7 +63,7 @@ function apiAxios (method, url, params, success, failure) {
 	 	withCredentials: false
  	})
  .then(function (res) {
- 		if (res.data.status === 1) {
+ 		if (!res.data.status || res.data.status === 1) {
  			success ? success(res.data) : Vue.toasted.show(res.data.msg);
  		} else {
  			failure ? failure(res.data) : Vue.toasted.show(res.data.msg);

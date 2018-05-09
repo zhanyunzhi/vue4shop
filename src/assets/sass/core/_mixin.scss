@@ -563,3 +563,80 @@
   border-radius:$height / 2 $height / 2;
 }
 
+@mixin arrow-right($color,$size){
+  content:"";
+  width: $size;
+  height: $size;
+  border-top: 1px solid $color;  /* 左边框的宽 */
+  border-right: 1px solid $color; /* 右边框的宽 */
+  display: inline-block;
+  @include rotate(45deg);
+  //transform: rotate(45deg);
+}
+@mixin arrow-left($color,$size){
+  content:"";
+  width: $size;
+  height: $size;
+  border-top: 1px solid $color;  /* 左边框的宽 */
+  border-right: 1px solid $color; /* 右边框的宽 */
+  display: inline-block;
+  @include rotate(-135deg);
+  //transform: rotate(-135deg);
+}
+@mixin arrow-up($color,$size){
+  content:"";
+  width: $size;
+  height: $size;
+  border-top: 1px solid $color;  /* 左边框的宽 */
+  border-right: 1px solid $color; /* 右边框的宽 */
+  display: inline-block;
+  @include rotate(-45deg);
+  //transform: rotate(-135deg);
+}
+@mixin arrow-down($color,$size){
+  content:"";
+  width: $size;
+  height: $size;
+  border-top: 1px solid $color;  /* 左边框的宽 */
+  border-right: 1px solid $color; /* 右边框的宽 */
+  display: inline-block;
+  @include rotate(135deg);
+  //transform: rotate(-135deg);
+}
+/*实心箭头*/
+@mixin triangle-right($color,$size){
+  content:"";
+  width: 0;
+  height: 0;
+  border-top: $size solid transparent;
+  border-left: $size * 2 solid $color;
+  border-bottom: $size solid transparent;
+  display: inline-block;
+}
+@mixin triangle-left($color,$size){
+  content:"";
+  width: 0;
+  height: 0;
+  border-top: $size solid transparent;
+  border-right: $size * 2 solid $color;
+  border-bottom: $size solid transparent;
+  display: inline-block;
+}
+@mixin triangle-top($color,$size){
+  content:"";
+  width: 0;
+  height: 0;
+  border-left: $size solid transparent;
+  border-bottom: $size * 2 solid $color;
+  border-right: $size solid transparent;
+  display: inline-block;
+}
+@mixin triangle-bottom($color,$size){
+  content:"";
+  width: 0;
+  height: 0;
+  border-left: $size solid transparent;
+  border-top: $size * 2 solid $color;
+  border-right: $size solid transparent;
+  display: inline-block;
+}

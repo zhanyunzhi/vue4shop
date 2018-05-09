@@ -80,11 +80,11 @@
     	this.$api.get('home','',res => {
         this.goodLists = res.result.goods;
         this.banners = res.result.ad;
-        this.setBanner(this.banners);
+        this.$_setBanner(this.banners);
       })
     },
     methods: {
-      setBanner: function (banners) {
+      $_setBanner: function (banners) {
         for(let k in banners){
           this.pages[k].style.background = 'url(' + banners[k].ad_code + ')'
         }
