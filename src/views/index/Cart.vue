@@ -1,6 +1,7 @@
 <template>
   <div>
-  	<single-cart-one
+    <no-data v-if="isEmpty">没有数据</no-data>
+  	<single-cart-one v-else
 				v-for="cart in cartList" 
         :key="cart.goods_id"
         :imgUrl="cart.image"
@@ -13,15 +14,18 @@
 </template>
 
 <script>
-	import SingleCartOne from '@/components/SingleCartOne'		//引入SingleGoodOne组件
+  import SingleCartOne from '@/components/SingleCartOne'    //引入SingleGoodOne组件
+	import NoData from '@/components/NoData'		//引入SingleGoodOne组件
 	export default {
 		name: "Cart",
   	components: {
-			SingleCartOne
+			SingleCartOne,
+      NoData
   	},
   	data () {
   		return {
   			cartList: [],
+        isEmpty: false,
   		}
   	},
   	created: function() {
@@ -30,7 +34,7 @@
     methods: {
       $_cart_getList: function () {
 	    	this.$api.get('cartList','/user_id/102',res => {
-	        this.cartList = res;
+          res.length > 0 ? this.cartList = res : this.isEmpty = true;
 	      })	
       }
     }

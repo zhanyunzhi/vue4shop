@@ -2,7 +2,7 @@
 <template>
   <div class="cart">
   	<span :class="{ 'check-box-active': isActive, 'check-box': !isActive }"></span>
-  	<img class="cart-img" :src="imgUrl" :alt="number">
+  	<img class="cart-img" :src="imgUrl" :alt="number" />
   	<div class="good-info">
   		<p class="intro">{{intro}}</p>
   		<div class="info">
@@ -11,7 +11,7 @@
 	  			<div class="num_wrap">                           
 	  				<span class="minus"></span>                           
 	  				<div class="input_wrap">
-	  					<input class="num" type="tel" value="1" max="200" prevalue="2" lowestbuy="0">
+	  					<input class="num" type="tel" value="1" max="200" prevalue="2" lowestbuy="0" />
 	  				</div>                           
 	  				<span class="plus " prevalue="1"></span>                         
   				</div>                     
@@ -110,67 +110,67 @@
 		}
 	}
 
-.num_and_more{
-	font-size: .24rem;
-  color: $black9;
-  display: inline-block;
-}
-.num_wrap {
-  position: relative;
-  display: block;
-  width: 2.14rem;
-  border-radius: .08rem;
-  overflow: hidden;
-  background-color: #f7f7f7;
-}
-.num_wrap input, .num_wrap span {
-  position: relative;
-  float: left;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-}
-.num_wrap .input_wrap {
-  float: left;
-  position: relative;
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
-}
-.num {
-    font-size: 12px;
-    color: #999;
-    flex: 1;
-    min-width: 0;
-}
-.num_wrap .num {
-    -webkit-appearance: none;
-    border: none;
-    width: 45px;
-    text-align: center;
-    background: none;
-    -webkit-border-radius: 0;
-}
+	.num_and_more{
+		font-size: .24rem;
+	  color: $black9;
+	  display: inline-block;
+	}
+	.num_wrap {
+	  position: relative;
+	  display: block;
+	  width: 2.14rem;
+	  border-radius: .08rem;
+	  overflow: hidden;
+	  background-color: #f7f7f7;
+	}
+	.num_wrap input, .num_wrap span {
+	  position: relative;
+	  float: left;
+	  width: 30px;
+	  height: 30px;
+	  line-height: 30px;
+	  text-align: center;
+	}
+	.num_wrap .input_wrap {
+	  float: left;
+	  position: relative;
+	  border-left: 1px solid #fff;
+	  border-right: 1px solid #fff;
+	}
+	.num {
+	    font-size: 12px;
+	    color: #999;
+	    flex: 1;
+	    min-width: 0;
+	}
+	.num_wrap .num {
+	    -webkit-appearance: none;
+	    border: none;
+	    width: 45px;
+	    text-align: center;
+	    background: none;
+	    -webkit-border-radius: 0;
+	}
 
-.num_wrap .minus:after, .num_wrap .plus:after, .num_wrap .plus:before {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  content: "";
-  display: block;
-  width: 16px;
-  height: 2px;
-  margin: -1px 0 0 -8px;
-  background: #999;
-  border-radius: 1px;
-}
-.num_wrap .plus:before {
-  width: 2px;
-  height: 16px;
-  margin: -8px 0 0 -1px;
-  border-radius: 1px;
-}
-.num_wrap .disabled:after, .num_wrap .disabled:before {
-  background: hsla(0,0%,80%,.3);
-}
+	.num_wrap .minus:after, .num_wrap .plus:after, .num_wrap .plus:before {
+	  position: absolute;
+	  left: 50%;
+	  top: 50%;
+	  content: "";
+	  display: block;
+	  width: 16px;
+	  height: 2px;
+	  margin: -1px 0 0 -8px;
+	  background: #999;
+	  border-radius: 1px;
+	}
+	.num_wrap .plus:before {
+	  width: 2px;
+	  height: 16px;
+	  margin: -8px 0 0 -1px;
+	  border-radius: 1px;
+	}
+	.num_wrap .disabled:after, .num_wrap .disabled:before {
+	  background: hsla(0,0%,80%,.3);
+	}
 </style>
