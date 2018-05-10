@@ -1,6 +1,6 @@
 <template>
   <div>
-    <no-data v-if="isEmpty">没有数据</no-data>
+    <no-data v-if="isEmpty" text="购物车空空如也" icon="icon-cart"></no-data>
   	<single-cart-one v-else
 				v-for="cart in cartList" 
         :key="cart.goods_id"
