@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../src/assets/css/global.css'; /*引入公共样式*/
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

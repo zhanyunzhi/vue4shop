@@ -1,7 +1,12 @@
 <template>
   <div class="footer">
   	<ul>
-  		<li v-for="navList in navLists"><router-link :to="navList.paths" exact><h2 :class="navList.image"></h2><span>{{navList.text}}</span></router-link></li>
+  		<li v-for="navList in navLists">
+  			<router-link :to="navList.paths" exact>
+	  			<i class="iconfont" :class="navList.icon"></i>
+	        <span>{{navList.text}}</span>
+	      </router-link>
+    	</li>
   	</ul>
   </div>
 </template>
@@ -15,23 +20,23 @@ export default {
   			{
   				'text':'首页',
   				'paths':'/',
-  				'image':'icon_home'
+  				'icon':'icon-index'
 
   			},
   			{
   				'text':'分类',
   				'paths':'/category',
-  				'image':'icon_cate'
+  				'icon':'icon-category'
   			},
   			{
   				'text':'购物车',
   				'paths':'/cart',
-  				'image':'icon_cart'
+  				'icon':'icon-cart'
   			},
   			{
   				'text':'我',
   				'paths':'/my',
-  				'image':'icon_my'
+  				'icon':'icon-my'
   			},
   		]
   	}
@@ -66,38 +71,16 @@ export default {
 				}
 				.router-link-active{
 					span{
-						color: $green;
+						color: $red;
 					}
-					.icon_home{
-						background-image: url(../assets/images/footer/icon_home_selected.png);
-					}
-					.icon_cate{
-						background-image: url(../assets/images/footer/icon_cate_selected.png);
-					}
-					.icon_cart{
-						background-image: url(../assets/images/footer/icon_cart_selected.png);
-					}
-					.icon_my{
-						background-image: url(../assets/images/footer/icon_my_selected.png);
+					.icon-index,.icon-category,.icon-cart,.icon-my{
+						color: $red;
 					}
 				}
-				h2{
-					width:.6rem;
-					height:.6rem;
+				.iconfont{
+					font-size:.44rem;
 					margin: .06rem auto;
 					background-size: 100%;
-				}
-				.icon_home{
-					background-image: url(../assets/images/footer/icon_home.png);
-				}
-				.icon_cate{
-					background-image: url(../assets/images/footer/icon_cate.png);
-				}
-				.icon_cart{
-					background-image: url(../assets/images/footer/icon_cart.png);
-				}
-				.icon_my{
-					background-image: url(../assets/images/footer/icon_my.png);
 				}
 			}
 		}
