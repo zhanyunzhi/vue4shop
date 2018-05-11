@@ -71,7 +71,8 @@ function apiAxios (method, url, params, success, failure) {
  	})
  	.catch(function (err) {
 	 	let res = err.response
-	 	if (err) {
+	 	console.log(err)
+	 	if (res) {
 	 		Vue.toasted.error('error code ' + res.status);
 	 	}
  	})

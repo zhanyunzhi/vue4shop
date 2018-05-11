@@ -20,7 +20,7 @@ export default {
   			{
   				'text':'首页',
   				'paths':'/',
-  				'icon':'icon-index'
+  				'icon':'icon-home'
 
   			},
   			{

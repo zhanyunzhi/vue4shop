@@ -7,15 +7,16 @@
   		<p class="intro">{{intro}}</p>
   		<div class="info">
 	  		<span class="price">￥{{price}}</span>
-	  		<div class="num_and_more">                         
-	  			<div class="num_wrap">                           
+	  		<div class="num-and-more">                         
+	  			<div class="num-wrap">                           
 	  				<span class="minus"></span>                           
-	  				<div class="input_wrap">
-	  					<input class="num" type="tel" value="1" max="200" prevalue="2" lowestbuy="0" />
+	  				<div class="input-wrap">
+	  					<input class="num" type="tel" value="1" max="200"/>
 	  				</div>                           
-	  				<span class="plus " prevalue="1"></span>                         
+	  				<span class="plus " prevalue="1"></span>                    
   				</div>                     
 				</div>
+	  		<i class="iconfont icon-delete"></i>
   		</div>
   	</div>
   </div>
@@ -110,12 +111,12 @@
 		}
 	}
 
-	.num_and_more{
+	.num-and-more{
 		font-size: .24rem;
 	  color: $black9;
 	  display: inline-block;
 	}
-	.num_wrap {
+	.num-wrap {
 	  position: relative;
 	  display: block;
 	  width: 2.14rem;
@@ -123,7 +124,7 @@
 	  overflow: hidden;
 	  background-color: #f7f7f7;
 	}
-	.num_wrap input, .num_wrap span {
+	.num-wrap input, .num-wrap span {
 	  position: relative;
 	  float: left;
 	  width: 30px;
@@ -131,7 +132,7 @@
 	  line-height: 30px;
 	  text-align: center;
 	}
-	.num_wrap .input_wrap {
+	.num-wrap .input-wrap {
 	  float: left;
 	  position: relative;
 	  border-left: 1px solid #fff;
@@ -143,7 +144,7 @@
 	    flex: 1;
 	    min-width: 0;
 	}
-	.num_wrap .num {
+	.num-wrap .num {
 	    -webkit-appearance: none;
 	    border: none;
 	    width: 45px;
@@ -152,7 +153,7 @@
 	    -webkit-border-radius: 0;
 	}
 
-	.num_wrap .minus:after, .num_wrap .plus:after, .num_wrap .plus:before {
+	.num-wrap .minus:after, .num-wrap .plus:after, .num-wrap .plus:before {
 	  position: absolute;
 	  left: 50%;
 	  top: 50%;
@@ -164,13 +165,19 @@
 	  background: #999;
 	  border-radius: 1px;
 	}
-	.num_wrap .plus:before {
+	.num-wrap .plus:before {
 	  width: 2px;
 	  height: 16px;
 	  margin: -8px 0 0 -1px;
 	  border-radius: 1px;
 	}
-	.num_wrap .disabled:after, .num_wrap .disabled:before {
+	.num-wrap .disabled:after, .num-wrap .disabled:before {
 	  background: hsla(0,0%,80%,.3);
+	}
+
+	.icon-delete{
+		font-size: .4rem;
+		margin-top: .1rem;
+		color: $red;
 	}
 </style>

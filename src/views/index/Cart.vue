@@ -1,13 +1,14 @@
 <template>
   <div>
-    <no-data v-if="isEmpty" text="购物车空空如也" icon="icon-cart"></no-data>
+    <no-data v-if="cart.isEmpty" text="购物车空空如也" icon="icon-cart"></no-data>
   	<single-cart-one v-else
-				v-for="cart in cartList" 
-        :key="cart.goods_id"
-        :imgUrl="cart.image"
-        :intro="cart.goods_name"
-        :price="cart.shop_price"
-        :number="cart.goods_num"
+				v-for="good in cart.goodList" 
+        :key="good.gId"
+        :imgUrl="good.image"
+        :intro="good.intro"
+        :price="good.price"
+        :number="good.num"
+        :isActive="good.active"
   	></single-cart-one>
   	<footer-nav></footer-nav>
   </div>
@@ -16,6 +17,7 @@
 <script>
   import SingleCartOne from '@/components/SingleCartOne'    //引入SingleGoodOne组件
 	import NoData from '@/components/NoData'		//引入SingleGoodOne组件
+  import {mapState,mapGetters,mapMutations,mapActions} from 'vuex';
 	export default {
 		name: "Cart",
   	components: {
@@ -24,18 +26,35 @@
   	},
   	data () {
   		return {
-  			cartList: [],
-        isEmpty: false,
   		}
   	},
+    computed: {
+      ...mapGetters('cart',{
+        cart: 'getCart'
+      }),
+      ...mapActions('cart',{
+        getGoodList: 'getGoodList'
+      }),
+    },
   	created: function() {
-        this.$_cart_getList();
+        // this.$_cart_getList();
+        this.getGoodList;
+    console.log(this.cart)
+        // this.$store.dispatch('getGoodList')
     },
     methods: {
       $_cart_getList: function () {
-	    	this.$api.get('cartList','/user_id/102',res => {
-          res.length > 0 ? this.cartList = res : this.isEmpty = true;
-	      })	
+        // this.getGoodList();
+	    	/*this.$api.get('cartList','/user_id/142',res => {
+          if(res.length > 0){
+            this.cartList = res;
+            this.cartList.forEach((value,index) => {    //将所有购物车内商品标记为选中
+              value.active = true;
+            })
+          }else{
+            this.isEmpty = true;
+          }
+	      })*/	
       }
     }
 	}
