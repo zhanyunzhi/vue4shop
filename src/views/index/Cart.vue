@@ -10,6 +10,18 @@
         :number="good.num"
         :isActive="good.active"
   	></single-cart-one>
+    <div class="cart-info">
+      <div class="select-all">
+        <span :class="{ 'check-box-active': isAll, 'check-box': !isAll }"></span>
+        全选
+      </div>
+      <div class="money">
+        <span>总计：<span class="num">￥{{totalPrice||0.00}}</span></span>
+      </div>
+      <div class="submit" @click="addGoods()">
+        去结算({{cart.totalNum||0}}件)
+      </div>
+    </div>
   	<footer-nav></footer-nav>
   </div>
 </template>
@@ -26,40 +38,97 @@
   	},
   	data () {
   		return {
+        isAll: true
   		}
   	},
-    computed: {
-      ...mapGetters('cart',{
-        cart: 'getCart'
-      }),
-      ...mapActions('cart',{
-        getGoodList: 'getGoodList'
-      }),
-    },
   	created: function() {
         // this.$_cart_getList();
         this.getGoodList;
-    console.log(this.cart)
+    // console.log(this.cart)
         // this.$store.dispatch('getGoodList')
     },
+    computed: {
+      ...mapGetters('cart',{
+        cart: 'getCart',
+        totalPrice: 'getTotalPrice',
+        totalNum: 'getTotalNum'
+      }),
+      ...mapActions('cart',{
+        getGoodList: 'getGoodList',
+        addGoods: 'addGoods'
+      }),
+    },
     methods: {
-      $_cart_getList: function () {
-        // this.getGoodList();
-	    	/*this.$api.get('cartList','/user_id/142',res => {
-          if(res.length > 0){
-            this.cartList = res;
-            this.cartList.forEach((value,index) => {    //将所有购物车内商品标记为选中
-              value.active = true;
-            })
-          }else{
-            this.isEmpty = true;
-          }
-	      })*/	
-      }
+      /*...mapMutations('cart',{
+        addGoods: 'addGoods'
+      }),*/
     }
 	}
 </script>
 
 <style scoped lang="scss">
-
+.cart-info{
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.2rem;
+  z-index: 9;
+  background-color: #fff;
+  border-top: 1px solid $borderColor;
+  align-items: center;
+  justify-content: space-between;
+}
+.select-all{
+  width:1.5rem;
+  font-size: .24rem;
+  line-height: .4rem;
+  color: $black9;
+}
+.check-box{
+  display: inline-block;
+  width: .4rem;
+  height: .4rem;
+  background-color: $white;
+  border: 1px solid $borderColor;
+  border-radius: .2rem;
+  box-sizing: border-box;
+  margin-bottom: -0.1rem;
+}
+.check-box-active{
+  display: inline-block;
+  width: .4rem;
+  height: .4rem;
+  background-color: $green;
+  border-radius: .2rem;
+  position: relative;
+  margin-bottom: -0.1rem;
+  &:before{
+    content: "";
+    width: .2rem;
+    height: .1rem;
+    border-top: 1px solid $white;  /* 左边框的宽 */
+    border-right: 1px solid $white; /* 右边框的宽 */
+    display: inline-block;
+    transform: rotate(135deg);
+    position: absolute;
+    bottom: .16rem;
+    left: .1rem;
+  }
+}
+.money{
+  font-size: .32rem;
+  font-weight: bold;
+  .num{
+    color: $red;
+  }
+}
+.submit{
+  width: 2.2rem;
+  background-color: $red;
+  height: 100%;
+  color: $white;
+  line-height: 1.1rem;
+}
 </style>

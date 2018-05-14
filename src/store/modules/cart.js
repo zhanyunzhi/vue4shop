@@ -5,6 +5,7 @@
  * @version $Id$
  */
 import api from '../../api'		
+import { cart } from './mutation-types'		
  //定义字段，类似建立了数据库表
 const state = {
 	cart: {
@@ -16,23 +17,24 @@ const state = {
 }
 //转变字段，有点类似操作数据库
 const mutations = {
-	reset(state){			//重置总金额和总数量
-    state.cart.totalPrice = this.getters.getTotalPrice;
-    state.cart.totalNum = this.getters.getTotalNum;
-  },
+	/*reset(state){			//重置总金额和总数量
+    state.cart.totalPrice = getters.getTotalPrice(state);
+    state.cart.totalNum = getters.getTotalNum(state);
+  },*/
 	updateGoodList(state, { goodList }) {			//更新购物车内的物品，请求api之后将数据通过此方法更新
 		state.cart.goodList = goodList;
 	},
-	setIsEmpty(state, payload) {		//是否购物车为空
+	[cart.SET_IS_EMPTY](state, payload) {		//是否购物车为空
 		state.cart.isEmpty = payload.isEmpty;
 	},
   reduceGoods(state,index){ 			//商品减1
-    state.cart.goodsData[index].num-=1;
+    state.cart.goodList[index].num-=1;
     this.commit('reset');		//重新计算总金额和总数量
   },
-  addGoods(state,index){			//商品加1
-    state.cart.goodsData[index].num+=1;
-    this.commit('reset');		//重新计算总金额和总数量
+  addGoods(state, payload){			//商品加1
+  	console.log(payload.num)
+  	console.log(state.cart.goodList[payload.num])
+    state.cart.goodList[payload.num].num = parseInt(state.cart.goodList[payload.num].num)+1;
   }
 }
 //类似操作数据库之前写一些处理的逻辑
@@ -53,20 +55,24 @@ const actions = {
           good = {};		//不重置的话会得到一样的good，不知道为哈
         })
         commit('updateGoodList',{ goodList: aCartList })
-        commit('reset')
-        commit('setIsEmpty',{ isEmpty: false })
+        // commit('reset')
+        commit('SET_IS_EMPTY',{ isEmpty: false })
       }else{
-        commit('setIsEmpty',{ isEmpty: true })
+        commit('SET_IS_EMPTY',{ isEmpty: true })
       }
     })
 	}, 
+	addGoods: ({ commit }) => {
+		commit('addGoods',{ num: 0});
+	}, 
 }
-//获取数据库字段
+//获取数据库字段  getters中不推荐使用箭头
 const getters = {
 	getTotalNum: state => {				//返回购物车的商品总数
 		let iTotalNum = 0;
+    // console.log(state.cart.goodList)
 		state.cart.goodList.forEach((value,index) => {
-			iTotalNum += value.num;
+			iTotalNum += parseInt(value.num);
 		})
 		return iTotalNum;
 	},
