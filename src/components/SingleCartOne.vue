@@ -1,7 +1,7 @@
 <!-- 单个购物车样式1 -->
 <template>
   <div class="cart">
-  	<span :class="{ 'check-box-active': isActive, 'check-box': !isActive }"></span>
+  	<span :class="{ 'check-box-active': isActive, 'check-box': !isActive }" @click="switchAction({index:index})"></span>
   	<img class="cart-img" :src="imgUrl" :alt="intro" />
   	<div class="good-info">
   		<p class="intro">{{intro}}</p>
@@ -34,7 +34,7 @@
 	  		type: [Number,String],
 	  		validator: function (value) {
         // 这个值不能小于1
-	        return parseInt(value) < 1 ? 1 : value;
+	        return parseInt(value) > 0;
 	      }
 	  	},
 	  	isActive: {
@@ -47,6 +47,7 @@
       ...mapActions('cart',{
         addGoods: 'addGoods',				
         reduceGoods: 'reduceGoods',
+        switchAction: 'switchAction',
       }),
     }
 	}

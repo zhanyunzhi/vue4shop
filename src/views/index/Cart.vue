@@ -7,13 +7,13 @@
         :imgUrl="good.image"
         :intro="good.intro"
         :price="good.price"
-        :number="0"
+        :number="good.num"
         :isActive="good.active"
         :index="index"
   	></single-cart-one>
     <div class="cart-info">
       <div class="select-all">
-        <span :class="{ 'check-box-active': isAll, 'check-box': !isAll }"></span>
+        <span :class="{ 'check-box-active': isSelectAll, 'check-box': !isSelectAll }" @click="selectAll()"></span>
         全选
       </div>
       <div class="money">
@@ -39,13 +39,16 @@
   	},
   	data () {
   		return {
-        isAll: true
   		}
   	},
   	created: function() {
       this.getGoodList();
+      console.log(this.isSelectAll)
     },
     computed: {
+      ...mapState('cart',{
+        isSelectAll: 'isSelectAll',
+      }),
       ...mapGetters('cart',{
         cart: 'getCart',
         totalPrice: 'getTotalPrice',
@@ -54,7 +57,8 @@
     },
     methods: {
       ...mapActions('cart',{
-        getGoodList: 'getGoodList'
+        getGoodList: 'getGoodList',
+        selectAll: 'selectAll',
       }),
     }
 	}

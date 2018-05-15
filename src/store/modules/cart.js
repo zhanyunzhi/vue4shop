@@ -13,7 +13,8 @@ const state = {
 		totalNum: 0,
 		isEmpty: true,
 		goodList: []
-	}
+	},
+	isSelectAll: true,
 }
 //转变字段，有点类似操作数据库
 const mutations = {
@@ -28,16 +29,29 @@ const mutations = {
 		state.cart.isEmpty = payload.isEmpty;
 	},
   [cart.REDUCE_GOODS](state,payload){ 			//商品减1
-    state.cart.goodList[payload.index].num = parseInt(state.cart.goodList[payload.index].num)-1;
+  	if(state.cart.goodList[payload.index].num > 1){
+  		state.cart.goodList[payload.index].num = parseInt(state.cart.goodList[payload.index].num)-1;
+  	}
   },
   [cart.ADD_GOODS](state, payload){			//商品加1
     state.cart.goodList[payload.index].num = parseInt(state.cart.goodList[payload.index].num)+1;
+  },
+  [cart.SWITCH_ACTION](state, payload){			//切换商品是否选中
+    state.cart.goodList[payload.index].active = !state.cart.goodList[payload.index].active
+  },
+  [cart.SELECT_ALL](state, payload){			//全选或者全不选
+  	state.cart.goodList.forEach((value,index) => {
+  		state.cart.goodList[index].active = payload.isAction;
+  	});
+  },
+  [cart.SET_ALL_SELECT](state, payload){			//全选按钮是否选中
+  	state.isSelectAll = payload.isAction;
   }
 }
 //类似操作数据库之前写一些处理的逻辑
 const actions = {
 	getGoodList: ({ commit }) => {
-		api.get('cartList','/user_id/102',res => {
+		api.get('cartList','/user_id/142',res => {
 			let aCartList = [];
 			let good = {};		//单个商品
       if(res.length > 0){
@@ -65,6 +79,29 @@ const actions = {
 	reduceGoods: ({ commit }, payload) => {	//商品减一
 		commit('REDUCE_GOODS',{ index: payload.index});
 	}, 
+	switchAction: ({ commit,state }, payload) => {	//商品减一
+		commit('SWITCH_ACTION',{ index: payload.index});
+		let isAllSelect = true;
+		state.cart.goodList.forEach((value,index) => {
+  		if(!state.cart.goodList[index].active){
+  			isAllSelect = false;
+  		}
+  	});
+  	if(!isAllSelect){
+	  	commit('SET_ALL_SELECT',{ isAction: false });
+	  }else{
+	  	commit('SET_ALL_SELECT',{ isAction: true });
+	  }
+	}, 
+	selectAll: ({ commit,state }) => {	//全选或者全不选
+		if(state.isSelectAll) {			//全选是已选中，则改成未选中
+	  	commit('SELECT_ALL',{ isAction: false });
+	  	commit('SET_ALL_SELECT',{ isAction: false });
+  	}else{
+  		commit('SELECT_ALL',{ isAction: true });
+  		commit('SET_ALL_SELECT',{ isAction: true });
+  	}
+	}, 
 }
 //获取数据库字段  getters中不推荐使用箭头  组件中通过getters获取到的state会在commit mutations的时候自动分发
 const getters = {
@@ -72,14 +109,14 @@ const getters = {
 		let iTotalNum = 0;
     // console.log(state.cart.goodList)
 		state.cart.goodList.forEach((value,index) => {
-			iTotalNum += parseInt(value.num);
+			if(value.active) iTotalNum += parseInt(value.num);
 		})
 		return iTotalNum;
 	},
 	getTotalPrice: state => {				//返回购物车的商品总数
 		let iTotalPrice = 0;
 		state.cart.goodList.forEach((value,index) => {
-			iTotalPrice += value.num * value.price;
+			if(value.active) iTotalPrice += value.num * value.price;
 		})
 		return iTotalPrice.toFixed(2);
 	},
