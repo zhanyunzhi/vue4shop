@@ -5,3 +5,9 @@
  * @version $Id$
  */
  
+export const  cart = {
+	SET_IS_EMPTY : 'SET_IS_EMPTY',
+	UPDATE_GOOD_LIST : 'UPDATE_GOOD_LIST',
+	ADD_GOODS : 'ADD_GOODS',
+	REDUCE_GOODS : 'REDUCE_GOODS',
+}

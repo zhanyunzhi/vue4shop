@@ -5,7 +5,7 @@
  * @version $Id$
  */
 import api from '../../api'		
-import { cart } from './mutation-types'		
+import { cart } from '../mutation-types'		
  //定义字段，类似建立了数据库表
 const state = {
 	cart: {
@@ -21,26 +21,23 @@ const mutations = {
     state.cart.totalPrice = getters.getTotalPrice(state);
     state.cart.totalNum = getters.getTotalNum(state);
   },*/
-	updateGoodList(state, { goodList }) {			//更新购物车内的物品，请求api之后将数据通过此方法更新
+	[cart.UPDATE_GOOD_LIST](state, { goodList }) {			//更新购物车内的物品，请求api之后将数据通过此方法更新
 		state.cart.goodList = goodList;
 	},
 	[cart.SET_IS_EMPTY](state, payload) {		//是否购物车为空
 		state.cart.isEmpty = payload.isEmpty;
 	},
-  reduceGoods(state,index){ 			//商品减1
-    state.cart.goodList[index].num-=1;
-    this.commit('reset');		//重新计算总金额和总数量
+  [cart.REDUCE_GOODS](state,payload){ 			//商品减1
+    state.cart.goodList[payload.index].num = parseInt(state.cart.goodList[payload.index].num)-1;
   },
-  addGoods(state, payload){			//商品加1
-  	console.log(payload.num)
-  	console.log(state.cart.goodList[payload.num])
-    state.cart.goodList[payload.num].num = parseInt(state.cart.goodList[payload.num].num)+1;
+  [cart.ADD_GOODS](state, payload){			//商品加1
+    state.cart.goodList[payload.index].num = parseInt(state.cart.goodList[payload.index].num)+1;
   }
 }
 //类似操作数据库之前写一些处理的逻辑
 const actions = {
 	getGoodList: ({ commit }) => {
-		api.get('cartList','/user_id/142',res => {
+		api.get('cartList','/user_id/102',res => {
 			let aCartList = [];
 			let good = {};		//单个商品
       if(res.length > 0){
@@ -54,7 +51,7 @@ const actions = {
           aCartList.push(good);
           good = {};		//不重置的话会得到一样的good，不知道为哈
         })
-        commit('updateGoodList',{ goodList: aCartList })
+        commit('UPDATE_GOOD_LIST',{ goodList: aCartList })
         // commit('reset')
         commit('SET_IS_EMPTY',{ isEmpty: false })
       }else{
@@ -62,11 +59,14 @@ const actions = {
       }
     })
 	}, 
-	addGoods: ({ commit }) => {
-		commit('addGoods',{ num: 0});
+	addGoods: ({ commit }, payload) => {		//商品加一
+		commit('ADD_GOODS',{ index: payload.index});
+	}, 
+	reduceGoods: ({ commit }, payload) => {	//商品减一
+		commit('REDUCE_GOODS',{ index: payload.index});
 	}, 
 }
-//获取数据库字段  getters中不推荐使用箭头
+//获取数据库字段  getters中不推荐使用箭头  组件中通过getters获取到的state会在commit mutations的时候自动分发
 const getters = {
 	getTotalNum: state => {				//返回购物车的商品总数
 		let iTotalNum = 0;

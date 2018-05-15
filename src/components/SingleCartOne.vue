@@ -2,18 +2,18 @@
 <template>
   <div class="cart">
   	<span :class="{ 'check-box-active': isActive, 'check-box': !isActive }"></span>
-  	<img class="cart-img" :src="imgUrl" :alt="number" />
+  	<img class="cart-img" :src="imgUrl" :alt="intro" />
   	<div class="good-info">
   		<p class="intro">{{intro}}</p>
   		<div class="info">
 	  		<span class="price">￥{{price}}</span>
 	  		<div class="num-and-more">                         
 	  			<div class="num-wrap">                           
-	  				<span class="minus"></span>                           
+	  				<span class="minus" @click="reduceGoods({index:index})"></span>                           
 	  				<div class="input-wrap">
-	  					<input class="num" type="tel" value="1" max="200"/>
+	  					<input class="num" type="tel" :value="number" max="200"/>
 	  				</div>                           
-	  				<span class="plus " prevalue="1"></span>                    
+	  				<span class="plus" @click="addGoods({index:index})"></span>                    
   				</div>                     
 				</div>
 	  		<i class="iconfont icon-delete"></i>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import {mapState,mapGetters,mapMutations,mapActions} from 'vuex';
 	export default {
 	  name: 'SingleCartOne',
 	  props: {
@@ -33,14 +34,21 @@
 	  		type: [Number,String],
 	  		validator: function (value) {
         // 这个值不能小于1
-	        return value < 1 ? 1 : value;
+	        return parseInt(value) < 1 ? 1 : value;
 	      }
 	  	},
 	  	isActive: {
 	  		type: Boolean,
 	  		default: true
-	  	}
+	  	},
+	  	index: [Number],
 		},
+		methods: {
+      ...mapActions('cart',{
+        addGoods: 'addGoods',				
+        reduceGoods: 'reduceGoods',
+      }),
+    }
 	}
 </script>
 

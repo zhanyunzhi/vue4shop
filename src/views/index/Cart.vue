@@ -2,13 +2,14 @@
   <div>
     <no-data v-if="cart.isEmpty" text="购物车空空如也" icon="icon-cart"></no-data>
   	<single-cart-one v-else
-				v-for="good in cart.goodList" 
+				v-for="(good,index) in cart.goodList" 
         :key="good.gId"
         :imgUrl="good.image"
         :intro="good.intro"
         :price="good.price"
-        :number="good.num"
+        :number="0"
         :isActive="good.active"
+        :index="index"
   	></single-cart-one>
     <div class="cart-info">
       <div class="select-all">
@@ -18,8 +19,8 @@
       <div class="money">
         <span>总计：<span class="num">￥{{totalPrice||0.00}}</span></span>
       </div>
-      <div class="submit" @click="addGoods()">
-        去结算({{cart.totalNum||0}}件)
+      <div class="submit">
+        去结算({{totalNum||0}}件)
       </div>
     </div>
   	<footer-nav></footer-nav>
@@ -42,10 +43,7 @@
   		}
   	},
   	created: function() {
-        // this.$_cart_getList();
-        this.getGoodList;
-    // console.log(this.cart)
-        // this.$store.dispatch('getGoodList')
+      this.getGoodList();
     },
     computed: {
       ...mapGetters('cart',{
@@ -53,15 +51,11 @@
         totalPrice: 'getTotalPrice',
         totalNum: 'getTotalNum'
       }),
-      ...mapActions('cart',{
-        getGoodList: 'getGoodList',
-        addGoods: 'addGoods'
-      }),
     },
     methods: {
-      /*...mapMutations('cart',{
-        addGoods: 'addGoods'
-      }),*/
+      ...mapActions('cart',{
+        getGoodList: 'getGoodList'
+      }),
     }
 	}
 </script>
