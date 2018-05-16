@@ -118,6 +118,8 @@
 .money{
   font-size: .32rem;
   font-weight: bold;
+  flex: 1;
+  text-align: left;
   .num{
     color: $red;
   }

@@ -11,7 +11,7 @@
 	  			<div class="num-wrap">                           
 	  				<span class="minus" @click="reduceGoods({index:index})"></span>                           
 	  				<div class="input-wrap">
-	  					<input class="num" type="tel" :value="number" max="200"/>
+	  					<input class="num" type="tel"  v-model="inputNum" @input="changeNum()" max="200"/>
 	  				</div>                           
 	  				<span class="plus" @click="addGoods({index:index})"></span>                    
   				</div>                     
@@ -43,11 +43,19 @@
 	  	},
 	  	index: [Number],
 		},
+		data () {
+			return {
+				inputNum: this.number,
+			}
+		},
 		methods: {
       ...mapActions('cart',{
         addGoods: 'addGoods',				
         reduceGoods: 'reduceGoods',
         switchAction: 'switchAction',
+        changeNum: function(index){
+        	console.log(this.inputNum)
+        }
       }),
     }
 	}
