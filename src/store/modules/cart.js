@@ -36,6 +36,9 @@ const mutations = {
   [cart.ADD_GOODS](state, payload){			//商品加1
     state.cart.goodList[payload.index].num = parseInt(state.cart.goodList[payload.index].num)+1;
   },
+  [cart.CHANGE_NUM](state, payload){			//改变商品输入框的数字是，从新计算
+    state.cart.goodList[payload.index].num = parseInt(state.cart.goodList[payload.index].num)+1;
+  },
   [cart.SWITCH_ACTION](state, payload){			//切换商品是否选中
     state.cart.goodList[payload.index].active = !state.cart.goodList[payload.index].active
   },
@@ -51,7 +54,7 @@ const mutations = {
 //类似操作数据库之前写一些处理的逻辑
 const actions = {
 	getGoodList: ({ commit }) => {
-		api.get('cartList','/user_id/142',res => {
+		api.get('cartList','/user_id/102',res => {
 			let aCartList = [];
 			let good = {};		//单个商品
       if(res.length > 0){

@@ -10,6 +10,7 @@
         :number="good.num"
         :isActive="good.active"
         :index="index"
+        @change-num="changeNum"
   	></single-cart-one>
     <div class="cart-info">
       <div class="select-all">
@@ -43,7 +44,7 @@
   	},
   	created: function() {
       this.getGoodList();
-      console.log(this.isSelectAll)
+      // console.log(this.isSelectAll)
     },
     computed: {
       ...mapState('cart',{
@@ -60,6 +61,9 @@
         getGoodList: 'getGoodList',
         selectAll: 'selectAll',
       }),
+      changeNum: function(data){
+        console.log(data)
+      },
     }
 	}
 </script>
