@@ -60,9 +60,12 @@
       ...mapActions('cart',{
         getGoodList: 'getGoodList',
         selectAll: 'selectAll',
+        changeNumToStore: 'changeNum',
       }),
       changeNum: function(data){
         console.log(data)
+        if(!data.value) return;
+        this.changeNumToStore(data)
       },
     }
 	}

@@ -11,7 +11,7 @@
 	  			<div class="num-wrap">                           
 	  				<span class="minus" @click="reduceGoods({index:index})"></span>                           
 	  				<div class="input-wrap">
-	  					<input class="num" type="tel"  v-model="inputNum" @input="$emit('change-num',{value:$event.target.value,index:index})" max="200"/>
+	  					<input class="num" type="tel" v-model="inputNum" @input="changeNum(index)" max="200" />
 	  				</div>                           
 	  				<span class="plus" @click="addGoods({index:index})"></span>                    
   				</div>                     
@@ -48,12 +48,25 @@
 				inputNum: this.number,
 			}
 		},
+		computed: {
+			
+		},
+		watch: {
+	    // 如果 `question` 发生改变，这个函数就会运行
+	    number: function (newValue) {
+	      this.inputNum = newValue;
+	    }
+	  },
 		methods: {
       ...mapActions('cart',{
         addGoods: 'addGoods',				
         reduceGoods: 'reduceGoods',
         switchAction: 'switchAction',
       }),
+      changeNum: function(index){
+      	if(!this.inputNum || this.inputNum<=0) this.inputNum = 1;
+      	this.$emit('change-num',{value:this.inputNum,index:index});		//向父级组件发送消息
+      },
     }
 	}
 </script>

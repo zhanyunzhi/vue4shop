@@ -37,7 +37,7 @@ const mutations = {
     state.cart.goodList[payload.index].num = parseInt(state.cart.goodList[payload.index].num)+1;
   },
   [cart.CHANGE_NUM](state, payload){			//改变商品输入框的数字是，从新计算
-    state.cart.goodList[payload.index].num = parseInt(state.cart.goodList[payload.index].num)+1;
+    state.cart.goodList[payload.index].num = parseInt(payload.value);
   },
   [cart.SWITCH_ACTION](state, payload){			//切换商品是否选中
     state.cart.goodList[payload.index].active = !state.cart.goodList[payload.index].active
@@ -82,7 +82,10 @@ const actions = {
 	reduceGoods: ({ commit }, payload) => {	//商品减一
 		commit('REDUCE_GOODS',{ index: payload.index});
 	}, 
-	switchAction: ({ commit,state }, payload) => {	//商品减一
+	changeNum: ({ commit }, payload) => {	//改变商品数量
+		commit('CHANGE_NUM', {index:payload.index, value:payload.value});
+	},  
+	switchAction: ({ commit,state }, payload) => {	//选中某个商品
 		commit('SWITCH_ACTION',{ index: payload.index});
 		let isAllSelect = true;
 		state.cart.goodList.forEach((value,index) => {
