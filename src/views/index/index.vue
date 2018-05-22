@@ -1,47 +1,52 @@
 <template>
   <div>
-		<vue-concise-slider :pages="pages" :sliderinit="sliderinit"></vue-concise-slider>
-    <section>
-      <ul class="nav">
-        <li><img src="@/assets/images/index/icon_all.png" alt="全部分类"><span>全部分类</span></li>
-        <li><img src="@/assets/images/index/icon_shop.png" alt="店铺街"><span>店铺街</span></li>
-        <li><img src="@/assets/images/index/icon_group.png" alt="团购"><span>团购</span></li>
-        <li><img src="@/assets/images/index/icon_cart.png" alt="购物车"><span>购物车</span></li>
-        <li><img src="@/assets/images/index/icon_coupon.png" alt="优惠券"><span>优惠券</span></li>
-        <li><img src="@/assets/images/index/icon_order.png" alt="我的订单"><span>我的订单</span></li>
-        <li><img src="@/assets/images/index/icon_collect.png" alt="我的收藏"><span>我的收藏</span></li>
-        <li><img src="@/assets/images/index/icon_member.png" alt="个人中心"><span>个人中心</span></li>
-      </ul>
-    </section>
-    <hr class="split_block"/>
-    <category-for-index class="clear-fix" v-for="goodList in goodLists" :key="goodList.id" :text="goodList.name">
-      <template slot="good">
-        <single-good-one 
-          v-for="goods in goodList.goods_list" 
-          :key="goods.goods_id"
-          :imgUrl="goods.original_img"
-          :intro="goods.goods_name"
-          :price="goods.shop_price"
-          :count="goods.click_count"
-        ></single-good-one>
-      </template>
-    </category-for-index>
+    <pull-to :top-load-method="refresh" :top-config="TOP_DEFAULT_CONFIG">
+  		<vue-concise-slider :pages="pages" :sliderinit="sliderinit"></vue-concise-slider>
+      <section>
+        <ul class="nav">
+          <li><img src="@/assets/images/index/icon_all.png" alt="全部分类"><span>全部分类</span></li>
+          <li><img src="@/assets/images/index/icon_shop.png" alt="店铺街"><span>店铺街</span></li>
+          <li><img src="@/assets/images/index/icon_group.png" alt="团购"><span>团购</span></li>
+          <li><img src="@/assets/images/index/icon_cart.png" alt="购物车"><span>购物车</span></li>
+          <li><img src="@/assets/images/index/icon_coupon.png" alt="优惠券"><span>优惠券</span></li>
+          <li><img src="@/assets/images/index/icon_order.png" alt="我的订单"><span>我的订单</span></li>
+          <li><img src="@/assets/images/index/icon_collect.png" alt="我的收藏"><span>我的收藏</span></li>
+          <li><img src="@/assets/images/index/icon_member.png" alt="个人中心"><span>个人中心</span></li>
+        </ul>
+      </section>
+      <hr class="split_block"/>
+      <category-for-index class="clear-fix" v-for="goodList in goodLists" :key="goodList.id" :text="goodList.name">
+        <template slot="good">
+          <single-good-one 
+            v-for="goods in goodList.goods_list" 
+            :key="goods.goods_id"
+            :imgUrl="goods.original_img"
+            :intro="goods.goods_name"
+            :price="goods.shop_price"
+            :count="goods.click_count"
+          ></single-good-one>
+        </template>
+      </category-for-index>
+    </pull-to>
   	<footer-nav></footer-nav>
   </div>
 </template>
 
 <script>
+  import PullTo from 'vue-pull-to'
   import VueConciseSlider from 'vue-concise-slider'   //引入slider组件
   import CategoryForIndex from '@/components/CategoryForIndex'    //引入GoodListClassify组件
 	import SingleGoodOne from '@/components/SingleGoodOne'		//引入SingleGoodOne组件
 	import path from '@/api/path'		
-	// import { getHome } from '@/api/api'		
+	// import { getHome } from '@/api/api'	
+  
 	export default {
 		name: "Index",
   	components: {
 			VueConciseSlider,
       CategoryForIndex,
       SingleGoodOne,
+      PullTo,
   	},
   	data () {
       return {
@@ -71,7 +76,17 @@
           slidesToScroll:1,//每次滑动项数
         },
         banners: [],
-        goodLists: []
+        goodLists: [],
+        TOP_DEFAULT_CONFIG: {
+          pullText: '下拉刷新', // 下拉时显示的文字
+          triggerText: '释放更新', // 下拉到触发距离时显示的文字
+          loadingText: '加载中...', // 加载中的文字
+          doneText: '加载完成', // 加载完成的文字
+          failText: '加载失败', // 加载失败的文字
+          loadedStayTime: 400, // 加载完后停留的时间ms
+          stayDistance: 50, // 触发刷新后停留的距离
+          triggerDistance: 70 // 下拉刷新触发的距离
+        }, 
       }
     },
     created: function() {
@@ -89,6 +104,12 @@
           this.pages[k].style.background = 'url(' + banners[k].ad_code + ')'
         }
         // console.log(this.pages)
+      },
+      refresh(loaded) {
+        setTimeout(() => {
+          console.log('refresh...');
+          loaded('done');
+        }, 2000);
       }
     }
 	}

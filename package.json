@@ -84,6 +84,7 @@
     "url-loader": "^0.5.8",
     "vue-concise-slider": "^2.4.8",
     "vue-loader": "^13.3.0",
+    "vue-pull-to": "^0.1.6",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "vue-toasted": "^1.1.24",

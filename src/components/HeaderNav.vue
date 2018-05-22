@@ -27,6 +27,7 @@
 		top: 0;
 		background-color: $whitef1;
 		line-height: .9rem;	
+		z-index: 999;
   	@include setMnWidth();
 	}
 	.header__title{
