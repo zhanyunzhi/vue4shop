@@ -73,7 +73,7 @@ export default {
 					span{
 						color: $red;
 					}
-					.icon-index,.icon-category,.icon-cart,.icon-my{
+					.icon-home,.icon-category,.icon-cart,.icon-my{
 						color: $red;
 					}
 				}

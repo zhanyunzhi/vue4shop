@@ -36,6 +36,9 @@ const mutations = {
   [cart.ADD_GOODS](state, payload){			//商品加1
     state.cart.goodList[payload.index].num = parseInt(state.cart.goodList[payload.index].num)+1;
   },
+  [cart.DELETE_GOODS](state, payload){			//删除商品
+    state.cart.goodList.splice(payload.index,1);
+  },
   [cart.CHANGE_NUM](state, payload){			//改变商品输入框的数字是，从新计算
     state.cart.goodList[payload.index].num = parseInt(payload.value);
   },
@@ -76,15 +79,24 @@ const actions = {
       }
     })
 	}, 
+
 	addGoods: ({ commit }, payload) => {		//商品加一
 		commit('ADD_GOODS',{ index: payload.index});
 	}, 
+
 	reduceGoods: ({ commit }, payload) => {	//商品减一
 		commit('REDUCE_GOODS',{ index: payload.index});
 	}, 
+
+	deleteGoods: ({ commit }, payload) => {	//商品减一
+		commit('DELETE_GOODS',{ index: payload.index});
+		if(state.cart.goodList.length < 1) commit('SET_IS_EMPTY',{ isEmpty: true });
+	}, 
+
 	changeNum: ({ commit }, payload) => {	//改变商品数量
 		commit('CHANGE_NUM', {index:payload.index, value:payload.value});
 	},  
+
 	switchAction: ({ commit,state }, payload) => {	//选中某个商品
 		commit('SWITCH_ACTION',{ index: payload.index});
 		let isAllSelect = true;
@@ -99,6 +111,7 @@ const actions = {
 	  	commit('SET_ALL_SELECT',{ isAction: true });
 	  }
 	}, 
+
 	selectAll: ({ commit,state }) => {	//全选或者全不选
 		if(state.isSelectAll) {			//全选是已选中，则改成未选中
 	  	commit('SELECT_ALL',{ isAction: false });

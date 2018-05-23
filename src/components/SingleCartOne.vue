@@ -11,12 +11,12 @@
 	  			<div class="num-wrap">                           
 	  				<span class="minus" @click="reduceGoods({index:index})"></span>                           
 	  				<div class="input-wrap">
-	  					<input class="num" type="tel" v-model="inputNum" @input="changeNum(index)" max="200" />
+	  					<input class="num" type="tel" v-model="inputNum" @blur="changeNum(index)" max="200" />
 	  				</div>                           
 	  				<span class="plus" @click="addGoods({index:index})"></span>                    
   				</div>                     
 				</div>
-	  		<i class="iconfont icon-delete"></i>
+	  		<i class="iconfont icon-delete" @click="deleteGoods({index:index})"></i>
   		</div>
   	</div>
   </div>
@@ -52,7 +52,7 @@
 			
 		},
 		watch: {
-	    // 如果 `question` 发生改变，这个函数就会运行
+	    // 如果 `number` 发生改变，这个函数就会运行
 	    number: function (newValue) {
 	      this.inputNum = newValue;
 	    }
@@ -62,6 +62,7 @@
         addGoods: 'addGoods',				
         reduceGoods: 'reduceGoods',
         switchAction: 'switchAction',
+        deleteGoods: 'deleteGoods',
       }),
       changeNum: function(index){
       	if(!this.inputNum || this.inputNum<=0) this.inputNum = 1;
