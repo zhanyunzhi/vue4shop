@@ -3,7 +3,9 @@
 import Vue from 'vue'			//引入vue框架
 import App from './App'			//引入根组件
 import router from './router'	//引入路由设置
-import store from './store'
+import store from './stores'		//引入vuex状态管理
+import directives from './directives'		//引入指令
+import filters from './filters'		//引入过滤
 // 引用API文件
 import api from './api'		
 Vue.prototype.$api = api;		// 将API方法绑定到全局
@@ -18,6 +20,7 @@ Vue.use(Toasted,{
 });
 
 Vue.config.productionTip = false	//关闭生产模式下给出的提示
+
 
 // axios.defaults.baseURL = process.env.NODE_ENV !== 'production' ? 'localhost/index.php/WXAPI/' : '127.0.0.1/index.php/WXAPI/';	//设置网络请求的baseURL
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;

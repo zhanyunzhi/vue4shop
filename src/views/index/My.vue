@@ -1,6 +1,6 @@
 <template>
   <div>
-  	欢迎来到my
+  	<input type="text" name="" v-focus>
   	<footer-nav></footer-nav>
   </div>
 </template>

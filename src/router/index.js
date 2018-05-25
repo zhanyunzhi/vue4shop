@@ -31,6 +31,7 @@ const router = new Router({   //定义路由
     },
     {
       path: '/my',
+      path: '/my',
       name: 'My',
       component: My,
     },
@@ -40,7 +41,7 @@ const router = new Router({   //定义路由
     },
   ]
 });
-import store from '@/store'
+import store from '@/stores'
 router.beforeEach((to, from, next) => {
   // console.log(store.state.header.showBack);       //路由中调用模块化后vuex中的state   
   // console.log(store.getters['footer/back']);      //路由中调用模块化后vuex中的getters
